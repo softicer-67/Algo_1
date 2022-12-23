@@ -24,15 +24,15 @@ def load_file():
 def filter_func(value: str, data):
     res = []
     value = ''.join(value)
-
     column = ['date', 'open', 'high', 'low', 'close', 'volume', 'Name']
 
     if value in column:
-        value = column.index(value)
-    data.sort(key=lambda row: row[value])
+        num = column.index(value)
 
-    for i in data:
-        res.append(i)
+        for i in range(len(data)):
+            if data[i][num] > data[i][num-1]:
+                res.append(data[i])
+        res = sorted(data, key=lambda x: x[num], reverse=True)
     return res
 
 
